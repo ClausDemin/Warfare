@@ -5,7 +5,7 @@ using Warfare.Model.Stats;
 
 namespace Warfare.Model
 {
-    public class Soldier: IAttacker, IDamageable
+    public class Soldier: IAttacker, IDamageable, IAbilityCaster
     {
         private Health _health;
         private Damage _damage;
@@ -23,7 +23,6 @@ namespace Warfare.Model
             IsAlive = true;
             _health.ValueChanged += OnHealthChanged;
             _health.Died += OnDeath;
-            _ability.AbilityUsed += OnAbilityUse;
         }
 
         public event Action<SoldierType, int>? DamageTaken;
@@ -44,23 +43,15 @@ namespace Warfare.Model
 
         public void Attack(IDamageable[] availableTargets)
         {
-            _ability.Use(availableTargets, _damage.Value);
+            _ability.Use(this, availableTargets, _damage.Value);
         }
 
         private void OnDeath() 
         { 
             IsAlive = false;
             _health.ValueChanged -= OnHealthChanged;
-            _ability.AbilityUsed -= OnAbilityUse;
-
+            
             Died?.Invoke(this);
-        }
-
-        private void OnAbilityUse(IDamageable target) 
-        {
-            var targetType = (target as Soldier)?.Type;
-
-            Console.WriteLine($"Боец {Type} атакует бойца {targetType}");
         }
 
         private void OnHealthChanged(int amount) 

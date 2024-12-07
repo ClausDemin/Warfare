@@ -31,6 +31,8 @@ namespace Warfare.Model
         private void OnSoldierDeath(Soldier deadSoldier)
         {
             deadSoldier.Died -= OnSoldierDeath;
+            deadSoldier.DamageTaken -= OnDamageTaken;
+
             _aliveSoldiers.Remove(deadSoldier);
 
             Console.WriteLine($"Боец {deadSoldier.Type} из отряда {Team} погибает ");

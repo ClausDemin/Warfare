@@ -11,14 +11,12 @@ namespace Warfare.Model.Abilities
             _damageMultiplyer = damageMultipyer;
         }
 
-        public override event Action<IDamageable>? AbilityUsed;
-
-        public override void Use(IDamageable[] targets, int damage)
+        public override void Use(IAbilityCaster caster, IDamageable[] targets, int damage)
         {
 
             var target = GetRandomTarget(targets);
-            
-            AbilityUsed?.Invoke(target);
+
+            PrintInfo(caster, target);
 
             target.TakeDamage((int) Math.Round(damage * _damageMultiplyer));
         }

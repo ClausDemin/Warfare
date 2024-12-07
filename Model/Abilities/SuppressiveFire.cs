@@ -6,18 +6,16 @@ namespace Warfare.Model.Abilities
     {
         private int _maxTargetsCount;
 
-        public override event Action<IDamageable>? AbilityUsed;
-
         public SuppressiveFire(int maxTargetsCount) 
         { 
             _maxTargetsCount = maxTargetsCount;
         }
 
-        public override void Use(IDamageable[] targets, int damage)
+        public override void Use(IAbilityCaster caster, IDamageable[] targets, int damage)
         {
             foreach (var target in GetTargets(targets, _maxTargetsCount)) 
-            { 
-                AbilityUsed?.Invoke(target);
+            {
+                PrintInfo(caster, target);
 
                 target.TakeDamage(damage);
             }

@@ -6,20 +6,18 @@ namespace Warfare.Model.Abilities
     {
         private int _maxAttackCount;
 
-        public override event Action<IDamageable>? AbilityUsed;
-
         public RapidFire(int maxAttackCount)
         {
             _maxAttackCount = maxAttackCount;
         }
 
-        public override void Use(IDamageable[] targets, int damage)
+        public override void Use(IAbilityCaster caster, IDamageable[] targets, int damage)
         {
             foreach (var target in targets)
             {
                 if (target.IsAlive)
                 {
-                    AbilityUsed?.Invoke(target);
+                    PrintInfo(caster, target);
 
                     target.TakeDamage(damage);
                 }

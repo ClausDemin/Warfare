@@ -9,46 +9,27 @@ namespace Warfare.Infrastructure
         private int minArmor = 0;
         private int maxArmor = 100;
 
-        private Dictionary<SoldierType, int> _soldiersHealth = new()
+        private Dictionary<SoldierType, SoldierConfig> _soldiersStats = new()
         {
-            {SoldierType.Conscript, 120},
-            {SoldierType.Marksman, 100},
-            {SoldierType.Stormtrooper, 130},
-            {SoldierType.Machinegunner, 140}
-        };
-
-        private Dictionary<SoldierType, int[]> _soldiersDamage = new() 
-        {
-            {SoldierType.Conscript, new int[] {10, 14} },
-            {SoldierType.Marksman, new int[] {20, 25 } },
-            {SoldierType.Stormtrooper, new int[] {16, 20 } },
-            {SoldierType.Machinegunner, new int[] {16, 18} }
-        };
-
-        private Dictionary<SoldierType, int> _soldiersArmor = new()
-        {
-            {SoldierType.Conscript, 10},
-            {SoldierType.Marksman, 5},
-            {SoldierType.Stormtrooper, 15},
-            {SoldierType.Machinegunner, 20}
+            {SoldierType.Conscript, new SoldierConfig(120, 10, 14, 10)},
+            {SoldierType.Marksman, new SoldierConfig(100, 20, 25, 5)},
+            {SoldierType.Stormtrooper, new SoldierConfig(130, 16, 20, 15)},
+            {SoldierType.Machinegunner, new SoldierConfig(140, 16, 18, 20)}
         };
 
         public Health GetHealth(SoldierType type) 
         {
-            return new Health(minHealth, _soldiersHealth[type]);
+            return new Health(minHealth, _soldiersStats[type].Health);
         }
 
         public Damage GetDamage(SoldierType type) 
         { 
-            var minDamage = _soldiersDamage[type][0];
-            var maxDamage = _soldiersDamage[type][1];
-
-            return new Damage(minDamage, maxDamage);
+            return new Damage(_soldiersStats[type].MinDamage, _soldiersStats[type].MaxDamage);
         }
 
         public Armor GetArmor(SoldierType type) 
         {
-            return new Armor(minArmor, maxArmor, _soldiersArmor[type]);
+            return new Armor(minArmor, maxArmor, _soldiersStats[type].Armor);
         }
     }
 }
