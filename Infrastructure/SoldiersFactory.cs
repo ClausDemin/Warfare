@@ -1,5 +1,4 @@
 ﻿using Warfare.Model;
-using Warfare.Model.Abilities;
 using Warfare.Model.Enums;
 
 namespace Warfare.Infrastructure

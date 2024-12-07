@@ -1,5 +1,4 @@
-﻿
-using Warfare.Model.Interfaces;
+﻿using Warfare.Model.Interfaces;
 
 namespace Warfare.Model.Abilities
 {

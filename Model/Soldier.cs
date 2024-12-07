@@ -2,7 +2,6 @@
 using Warfare.Model.Enums;
 using Warfare.Model.Interfaces;
 using Warfare.Model.Stats;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Warfare.Model
 {
