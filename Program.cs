@@ -12,7 +12,7 @@ namespace Warfare
             var squad1 = factory.Create(ConsoleColor.Red, SoldierType.Conscript, SoldierType.Conscript, SoldierType.Machinegunner, SoldierType.Stormtrooper, SoldierType.Marksman);
             var squad2 = factory.Create(ConsoleColor.Blue, SoldierType.Conscript, SoldierType.Marksman, SoldierType.Machinegunner, SoldierType.Stormtrooper, SoldierType.Marksman);
 
-            while (squad1.AliveSoldiers.Count() > 0 && squad2.AliveSoldiers.Count() > 0) 
+            while (squad1.AliveSoldiers.Count() > 0 && squad2.AliveSoldiers.Count() > 0)
             {
                 squad1.Attack(squad2.AliveSoldiers);
                 Console.WriteLine();
@@ -20,11 +20,15 @@ namespace Warfare
                 Console.WriteLine();
             }
 
-            if (squad1.AliveSoldiers.Count() == 0)
+            if (squad1.AliveSoldiers.Count() == 0 && squad2.AliveSoldiers.Count() == 0)
+            {
+                Console.WriteLine("Ничья");
+            }
+            else if (squad1.AliveSoldiers.Count() == 0 && squad2.AliveSoldiers.Count() != 0)
             {
                 Console.WriteLine($"Команда {squad2.Team} победила");
             }
-            else 
+            else
             {
                 Console.WriteLine($"Команда {squad1.Team} победила");
             }
